@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { React, useEffect, useState } from 'react';
 import './App.css';
+import Box from './components/Box/Box';
 
 function App() {
+
+  const [data, setData] = useState({})
+
+  const URL = `https://jsonplaceholder.typicode.com/posts`;
+
+  useEffect(() => {
+    fetch(URL)
+      .then((res) => res.json())
+      .then((results) => {
+        setData(results);
+      });
+  }, []);
+
+  console.log(data);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Let's Paginate</h1>
       </header>
+      <Box
+        header="uwu"
+        description="owo"
+        index="1"
+      />
     </div>
   );
 }
