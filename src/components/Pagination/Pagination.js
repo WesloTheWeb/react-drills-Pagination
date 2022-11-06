@@ -23,6 +23,8 @@ const Pagination = ({ data, RenderComponent, title, pageLimit, dataLimit }) => {
         return setCurrentPage(pageNumber);
     }
 
+    // The start index is calculated using the currentPage and dataLimit and the end index is calculated by 
+    // adding the start index and the dataLimit.
     const getPaginatedData = () => {
         const startIndex = currentPage * dataLimit - dataLimit;
         const endIndex = startIndex + dataLimit;
@@ -93,3 +95,12 @@ const Pagination = ({ data, RenderComponent, title, pageLimit, dataLimit }) => {
 };
 
 export default Pagination;
+
+/*################
+- data: An array of data that should be shown in the paginated form
+- RenderComponent: A component that should be used to show the paginated data. In our case, 
+this will the the Post component that we created earlier.
+- title: This is the title that should describe what the data is about. In our case, it will be the Posts
+- dataLimit: The number of posts to be shown on each page. In our case, it will be 10.
+- pageLimit: The number of pages to be shown in the pagination. In our case, it will be 5 pages at a time.
+###################*/
