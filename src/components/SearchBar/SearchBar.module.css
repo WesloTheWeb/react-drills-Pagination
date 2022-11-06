@@ -1,0 +1,7 @@
+.searchContainer {
+    font-size: 1.2rem;
+    padding: .5rem;
+    border: lightblue solid 1.2px;
+    margin: 0 auto;
+    display: block;
+}

@@ -43,7 +43,6 @@ const Pagination = ({ data, RenderComponent, title, pageLimit, dataLimit }) => {
     return (
         <div>
             <h1>{title}</h1>
-
             {/* show the posts, 10 posts at a time */}
             <div className="dataContainer">
                 {getPaginatedData().map((d, idx) => (
