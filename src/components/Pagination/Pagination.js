@@ -1,25 +1,22 @@
 import { React, useState } from 'react';
-import classes from './Pagination.module.css';
 
-const {pagination, paginationItem, prev, next, } = classes;
-
-const Pagination = ({ data, renderCompponent, title, pageLimit, dataLimit, pageLimit, }) => {
+const Pagination = ({ data, RenderComponent, title, pageLimit, dataLimit }) => {
     const [pages] = useState(Math.round(data.length / dataLimit));
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1);
 
     const goToNextPage = () => {
-        setCurrentPage((page) => page + 1);
-
+        return setCurrentPage((page) => page + 1);
     };
 
     const goToPrevPage = () => {
-        setCurrentPage((page) => page - 1);
+        return setCurrentPage((page) => page - 1);
     };
 
     /* The changePage function will be called when the user clicks on any page number and it will change the current page
         to the page number that was clicked by the user.*/
     const changePage = (evnt) => {
-
+        const pageNumber = Number(evnt.target.textContent);
+        return setCurrentPage(pageNumber);
     }
 
     const getPaginatedData = () => {
@@ -32,10 +29,11 @@ const Pagination = ({ data, renderCompponent, title, pageLimit, dataLimit, pageL
         let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
         return new Array(pageLimit).fill().map(
             (_, idx) => {
-                start + idx + 1
+                return start + idx + 1
             }
         );
     };
+
     return (
         <div>
             <h1>{title}</h1>
@@ -43,19 +41,25 @@ const Pagination = ({ data, renderCompponent, title, pageLimit, dataLimit, pageL
             {/* show the posts, 10 posts at a time */}
             <div className="dataContainer">
                 {getPaginatedData().map((d, idx) => (
-                    <RenderComponent key={idx} data={d} />
+                    <RenderComponent
+                        key={idx}
+                        // data={d} 
+                        id={d.id}
+                        title={d.title}
+                        body={d.body}
+                    />
                 ))}
             </div>
 
-            {/* show the pagiantion
+            {/* show the pagination
             it consists of next and previous buttons
             along with page numbers, in our case, 5 page
             numbers at a time
         */}
-            <div className={pagination}>
+            <div className='pagination'>
                 {/* previous button */}
                 <button
-                    onClick={goToPreviousPage}
+                    onClick={goToPrevPage}
                     className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
                 >
                     prev
@@ -83,6 +87,5 @@ const Pagination = ({ data, renderCompponent, title, pageLimit, dataLimit, pageL
         </div>
     );
 };
-
 
 export default Pagination;

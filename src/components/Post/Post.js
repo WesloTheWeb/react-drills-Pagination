@@ -1,25 +1,23 @@
 import { React } from 'react';
-import classes from './Box.module.css';
+import classes from './Post.module.css';
 
 const { boxContainer } = classes;
 
-const Box = ({ header, index, description }) => {
+const Post = ({ title, id, body }) => {
 
     return (
         <div className={boxContainer}>
             <section>
+                <small>{id}</small>
                 <h2>
-                    {index}
-                </h2>
-                <h2>
-                    {header}
+                    {title}
                 </h2>
                 <p>
-                    {description}
+                    {body}
                 </p>
             </section>
         </div>
     );
 };
 
-export default Box;
+export default Post;

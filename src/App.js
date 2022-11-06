@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import './App.css';
-import Box from './components/Box/Box';
+import Post from './components/Post/Post';
+import Pagination from './components/Pagination/Pagination';
 
 function App() {
 
@@ -8,7 +9,7 @@ function App() {
   const [error, setError] = useState('');
 
   const URL = `https://jsonplaceholder.typicode.com/posts`;
-  
+
   useEffect(() => {
     fetch(URL)
       .then((res) => {
@@ -21,7 +22,6 @@ function App() {
       .catch((error) => setError(error.message));
   }, []);
 
-  console.log(data);
 
   return (
     <div className="App">
@@ -29,16 +29,19 @@ function App() {
         <h1>Let's Paginate</h1>
       </header>
       {
-        data?.map((post) => {
-          return (
-            <Box
-              key={post.id}
-              index={post.id}
-              header={post.title}
-              description={post.body}
+        data.length > 0 ? (
+          <>
+            <Pagination
+              data={data}
+              RenderComponent={Post}
+              title="Posts"
+              pageLimit={5}
+              dataLimit={10}
             />
-          )
-        })
+          </>
+        ) : (
+          <h1>No Posts to display</h1>
+        )
       }
     </div>
   );
