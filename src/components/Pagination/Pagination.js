@@ -1,8 +1,12 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 const Pagination = ({ data, RenderComponent, title, pageLimit, dataLimit }) => {
     const [pages] = useState(Math.round(data.length / dataLimit));
     const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        window.scrollTo({ behavior: 'smooth', top: '0px' });
+      }, [currentPage]);
 
     const goToNextPage = () => {
         return setCurrentPage((page) => page + 1);
