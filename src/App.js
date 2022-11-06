@@ -4,16 +4,21 @@ import Box from './components/Box/Box';
 
 function App() {
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [error, setError] = useState('');
 
   const URL = `https://jsonplaceholder.typicode.com/posts`;
-
+  
   useEffect(() => {
     fetch(URL)
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error('Something went wrong awhile requestingf posts');
+      })
       .then((results) => {
         setData(results);
-      });
+      })
+      .catch((error) => setError(error.message));
   }, []);
 
   console.log(data);
